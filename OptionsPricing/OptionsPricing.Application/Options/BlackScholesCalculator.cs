@@ -8,33 +8,25 @@ namespace OptionsPricing.Application.Options
     {
         public double CalculateFor(BlackScholesInput blackScholesInput)
         {
-            char callOption = blackScholesInput.Cp;
-            double s = 0;
-            double x = 0;
-            double t = 0;
-            double r = 0;
-            double v = 0;
-
-            return CalculateFor(callOption, s, x, t, r, v);
+            return CalculateFor(new BlackScholes(blackScholesInput));
         }
 
-        private double CalculateFor(char callOption, double s, double x, double t, double r, double v)
+        private double CalculateFor(BlackScholes blackScholes)
         {
-            double d1 = 0.0;
-            double d2 = 0.0;
-            double dBlackScholes = 0.0;
+            double result = 0;
+            double d1 = (Math.Log(blackScholes.StockPrice / blackScholes.StrikePrice) + (blackScholes.RiskFreeRate + blackScholes.Volatility * blackScholes.Volatility / 2.0) * blackScholes.PeriodInDays) / (blackScholes.Volatility * Math.Sqrt(blackScholes.PeriodInDays));
+            double d2 = d1 - blackScholes.Volatility * Math.Sqrt(blackScholes.PeriodInDays);
 
-            d1 = (Math.Log(s / x) + (r + v * v / 2.0) * t) / (v * Math.Sqrt(t));
-            d2 = d1 - v * Math.Sqrt(t);
-            if (callOption == 'C')
+            if (blackScholes.CallOption == 'C')
             {
-                dBlackScholes = s * CumulativeNormalDistribution(d1) - x * Math.Exp(-r * t) * CumulativeNormalDistribution(d2);
+                result = blackScholes.StockPrice * CumulativeNormalDistribution(d1) - blackScholes.StrikePrice * Math.Exp(-blackScholes.RiskFreeRate * blackScholes.PeriodInDays) * CumulativeNormalDistribution(d2);
             }
-            else if (callOption == 'P')
+            else if (blackScholes.CallOption == 'P')
             {
-                dBlackScholes = x * Math.Exp(-r * t) * CumulativeNormalDistribution(-d2) - s * CumulativeNormalDistribution(-d1);
+                result = blackScholes.StrikePrice * Math.Exp(-blackScholes.RiskFreeRate * blackScholes.PeriodInDays) * CumulativeNormalDistribution(-d2) - blackScholes.StockPrice * CumulativeNormalDistribution(-d1);
             }
-            return dBlackScholes;
+
+            return result;
         }
 
         private double CumulativeNormalDistribution(double input)
