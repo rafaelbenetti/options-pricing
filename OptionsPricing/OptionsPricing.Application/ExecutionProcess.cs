@@ -27,7 +27,6 @@ namespace OptionsPricing.Application
             foreach (BlackScholesInput blackScholesInput in blackScholesInputCsv)
             {
                 double result = blackScholesCalculator.CalculateFor(blackScholesInput);
-                Console.ReadKey();
             }            
         }
     }

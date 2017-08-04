@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consts\CallOption.cs" />
+    <Compile Include="Extensions\DoubleExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ExceptionsResource.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -53,6 +53,7 @@
     <Compile Include="Models\BlackScholes\BlackScholes.cs" />
     <Compile Include="Models\BlackScholes\BlackScholesInput.cs" />
     <Compile Include="Models\BlackScholes\BlackScholesInputMap.cs" />
+    <Compile Include="Options\Base\InvalidCallOptionException.cs" />
     <Compile Include="Options\Base\IOptionPricingCalculator.cs" />
     <Compile Include="Options\BlackScholesCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

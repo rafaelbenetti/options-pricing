@@ -1,5 +1,7 @@
 ﻿using OptionsPricing.Application.Models.BlackScholes;
 using OptionsPricing.Application.Options.Base;
+using OptionsPricing.Infrastructure.Consts;
+using OptionsPricing.Infrastructure.Extensions;
 using System;
 
 namespace OptionsPricing.Application.Options
@@ -13,37 +15,45 @@ namespace OptionsPricing.Application.Options
 
         private double CalculateFor(BlackScholes blackScholes)
         {
-            double result = 0;
-            double d1 = (Math.Log(blackScholes.StockPrice / blackScholes.StrikePrice) + (blackScholes.RiskFreeRate + blackScholes.Volatility * blackScholes.Volatility / 2.0) * blackScholes.PeriodInDays) / (blackScholes.Volatility * Math.Sqrt(blackScholes.PeriodInDays));
-            double d2 = d1 - blackScholes.Volatility * Math.Sqrt(blackScholes.PeriodInDays);
+            double deltaOne = CalcDeltaOne(blackScholes);
+            double deltaTwo = CalcDeltaTwo(blackScholes, deltaOne);
 
-            if (blackScholes.CallOption == 'C')
-            {
-                result = blackScholes.StockPrice * CumulativeNormalDistribution(d1) - blackScholes.StrikePrice * Math.Exp(-blackScholes.RiskFreeRate * blackScholes.PeriodInDays) * CumulativeNormalDistribution(d2);
-            }
-            else if (blackScholes.CallOption == 'P')
-            {
-                result = blackScholes.StrikePrice * Math.Exp(-blackScholes.RiskFreeRate * blackScholes.PeriodInDays) * CumulativeNormalDistribution(-d2) - blackScholes.StockPrice * CumulativeNormalDistribution(-d1);
-            }
+            if (blackScholes.CallOption == CallOption.CALL)
+                return CalculateForCallOption(blackScholes, deltaOne, deltaTwo);
+            else if (blackScholes.CallOption == CallOption.PUT)
+                return CalculateForPutOption(blackScholes, deltaOne, deltaTwo);
 
-            return result;
+            throw new InvalidCallOptionException();
         }
 
-        private double CumulativeNormalDistribution(double input)
+        private double CalculateForCallOption(BlackScholes blackScholes, double deltaOne, double deltaTwo)
         {
-            double L, K, w;
-            double a1 = 0.31938153, a2 = -0.356563782, a3 = 1.781477937, a4 = -1.821255978, a5 = 1.330274429;
+            double reducedStrikePrice = deltaOne.CumulativeNormalDistribution() - blackScholes.StrikePrice;
+            double riskPerPeriod = Math.Exp(-blackScholes.RiskFreeRate * blackScholes.PeriodInDays);
 
-            L = Math.Abs(input);
-            K = 1.0 / (1.0 + 0.2316419 * L);
-            w = 1.0 - 1.0 / Math.Sqrt(2.0 * Math.PI) * Math.Exp(-L * L / 2) * (a1 * K + a2 * K * K + a3
-            * Math.Pow(K, 3) + a4 * Math.Pow(K, 4) + a5 * Math.Pow(K, 5));
-
-            if (input < 0.0)
-            {
-                w = 1.0 - w;
-            }
-            return w;
+            return blackScholes.StockPrice * reducedStrikePrice * riskPerPeriod * deltaTwo.CumulativeNormalDistribution();
         }
+
+        private double CalculateForPutOption(BlackScholes blackScholes, double deltaOne, double deltaTwo)
+        {
+            double reducedStockPrice = (-deltaTwo).CumulativeNormalDistribution() - blackScholes.StockPrice;
+            double riskPerPeriod = Math.Exp(-blackScholes.RiskFreeRate * blackScholes.PeriodInDays);            
+
+            return blackScholes.StrikePrice * riskPerPeriod * reducedStockPrice * (-deltaOne).CumulativeNormalDistribution();
+        }                
+
+        private double CalcDeltaTwo(BlackScholes blackScholes, double deltaOne)
+        {
+            return deltaOne - blackScholes.Volatility * Math.Sqrt(blackScholes.PeriodInDays);
+        }
+
+        private double CalcDeltaOne(BlackScholes blackScholes)
+        {
+            double stockDividedByStrike = Math.Log(blackScholes.StockPrice / blackScholes.StrikePrice);
+            double riskPerVolatility = blackScholes.RiskFreeRate + blackScholes.Volatility * blackScholes.Volatility / 2.0;
+            double stockPerRisksAndDays = stockDividedByStrike + riskPerVolatility * blackScholes.PeriodInDays;
+
+            return stockPerRisksAndDays / (blackScholes.Volatility * Math.Sqrt(blackScholes.PeriodInDays));
+        }        
     }
 }

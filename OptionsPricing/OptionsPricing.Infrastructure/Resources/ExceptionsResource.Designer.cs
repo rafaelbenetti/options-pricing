@@ -61,6 +61,15 @@ namespace OptionsPricing.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Call Option must be valid..
+        /// </summary>
+        public static string MsgInvalidCallOptionException {
+            get {
+                return ResourceManager.GetString("MsgInvalidCallOptionException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The File Reader Type specified is not implemented..
         /// </summary>
         public static string MsgInvalidFileReaderType {
