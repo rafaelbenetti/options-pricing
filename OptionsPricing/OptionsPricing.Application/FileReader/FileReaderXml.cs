@@ -36,9 +36,13 @@ namespace OptionsPricing.Application.FileReader
                 {
                     property.SetValue(objectToSet, Convert.ToDateTime(value));
                 }
-                else if (property.PropertyType == typeof(decimal))
+                else if (property.PropertyType == typeof(double))
                 {
-                    property.SetValue(objectToSet, Convert.ToDecimal(value));
+                    property.SetValue(objectToSet, Convert.ToDouble(value));
+                }
+                else if (property.PropertyType == typeof(char))
+                {
+                    property.SetValue(objectToSet, Convert.ToChar(value));
                 }
                 else
                 {

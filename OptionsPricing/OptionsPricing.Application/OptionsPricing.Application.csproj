@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExecutionProcess.cs" />
     <Compile Include="FileReader\Base\FileReaderTypeEnum.cs" />
     <Compile Include="FileReader\Base\IFileReader.cs" />
     <Compile Include="FileReader\Base\NotImplementedFileReaderException.cs" />
@@ -51,6 +52,8 @@
     <Compile Include="FileReader\FileReaderXml.cs" />
     <Compile Include="Models\BlackScholes\BlackScholesInput.cs" />
     <Compile Include="Models\BlackScholes\BlackScholesInputMap.cs" />
+    <Compile Include="Options\Base\IOptionPricingCalculator.cs" />
+    <Compile Include="Options\BlackScholesCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
