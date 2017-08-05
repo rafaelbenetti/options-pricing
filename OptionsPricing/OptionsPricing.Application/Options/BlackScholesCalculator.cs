@@ -21,27 +21,29 @@ namespace OptionsPricing.Application.Options
             if (blackScholes.CallOption == CallOption.CALL)
                 return CalculateForCallOption(blackScholes, deltaOne, deltaTwo);
             else if (blackScholes.CallOption == CallOption.PUT)
-                return CalculateForPutOption(blackScholes, deltaOne, deltaTwo);
+                return CalculateForPutOption(blackScholes, deltaOne, deltaTwo);                
 
             throw new InvalidCallOptionException();
         }
 
-        private double CalculateForCallOption(BlackScholes blackScholes, double deltaOne, double deltaTwo)
-        {
-            double reducedStrikePrice = deltaOne.CumulativeNormalDistribution() - blackScholes.StrikePrice;
-            double riskPerPeriod = Math.Exp(-blackScholes.RiskFreeRate * blackScholes.PeriodInDays);
-
-            return blackScholes.StockPrice * reducedStrikePrice * riskPerPeriod * deltaTwo.CumulativeNormalDistribution();
-        }
-
         private double CalculateForPutOption(BlackScholes blackScholes, double deltaOne, double deltaTwo)
         {
-            double reducedStockPrice = (-deltaTwo).CumulativeNormalDistribution() - blackScholes.StockPrice;
-            double riskPerPeriod = Math.Exp(-blackScholes.RiskFreeRate * blackScholes.PeriodInDays);            
+            double riskPerPeriod = Math.Exp(-blackScholes.RiskFreeRate * blackScholes.PeriodInDays);
+            double strikeVersusRisk = blackScholes.StrikePrice * riskPerPeriod * (-deltaTwo).CumulativeNormalDistribution();
+            double stockVersusDelta = blackScholes.StockPrice * (-deltaOne).CumulativeNormalDistribution();
 
-            return blackScholes.StrikePrice * riskPerPeriod * reducedStockPrice * (-deltaOne).CumulativeNormalDistribution();
-        }                
+            return strikeVersusRisk - stockVersusDelta;
+        }
 
+        private double CalculateForCallOption(BlackScholes blackScholes, double deltaOne, double deltaTwo)
+        {
+            double riskPerPeriod = Math.Exp(-blackScholes.RiskFreeRate * blackScholes.PeriodInDays);
+            double stockVersusDelta = blackScholes.StockPrice * deltaOne.CumulativeNormalDistribution();
+            double strikeVersusRisk = blackScholes.StrikePrice * riskPerPeriod * deltaTwo.CumulativeNormalDistribution();            
+
+            return stockVersusDelta - strikeVersusRisk;
+        }
+        
         private double CalcDeltaTwo(BlackScholes blackScholes, double deltaOne)
         {
             return deltaOne - blackScholes.Volatility * Math.Sqrt(blackScholes.PeriodInDays);

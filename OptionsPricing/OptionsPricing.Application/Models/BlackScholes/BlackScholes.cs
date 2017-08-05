@@ -27,11 +27,13 @@ namespace OptionsPricing.Application.Models.BlackScholes
             { BlackScholesNameConst.CDE_LTD, 110 }
         };
 
+        private DateTime _startDate = new DateTime(2016, 04, 01);
+
         public BlackScholes(BlackScholesInput input)
         {
             this.CallOption = input.Cp;
             this.StrikePrice = input.Strike;
-            this.PeriodInDays = (input.Expiry - new DateTime(2016, 04, 01)).Days;
+            this.PeriodInDays = (input.Expiry - _startDate).Days;
             this.RiskFreeRate = _risksForRegions[input.Ccy];
             this.Volatility = _volatilityForNames[input.Name];
             this.StockPrice = _stockPricesForNames[input.Name];
