@@ -1,0 +1,53 @@
+﻿using OptionsPricing.Application.FileReader;
+using OptionsPricing.Application.FileReader.Base;
+using OptionsPricing.Application.Models.BlackScholes;
+using OptionsPricing.Application.Options;
+using OptionsPricing.Infrastructure.Consts;
+using OptionsPricing.Infrastructure.Resources;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Windows.Forms;
+
+namespace OptionsPricing.Presentation.UI
+{
+    public partial class MainForm : Form
+    {
+        public MainForm()
+        {
+            InitializeComponent();
+        }
+
+        private void btnInputFile_Click(object sender, EventArgs e)
+        {
+            DialogResult result = openFileDialogCsv.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    FileReaderTypeEnum fileReaderTypeEnum = GetFileReaderTypeFor(openFileDialogCsv.FileName);
+                    IFileReader reader = FileReaderFactory.GetReader(fileReaderTypeEnum);
+                    List<BlackScholesInput> blackScholesInputData = reader.Read<BlackScholesInput>(openFileDialogCsv.FileName);
+
+                    var optionPricingCalculator = new BlackScholesCalculator();
+                    List<BlackScholesResult> blackScholesResultData = optionPricingCalculator.CalculateFor(blackScholesInputData);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(ErrorsResource.ErrorToProcessData, ErrorsResource.TitleErrorToProcessData, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private FileReaderTypeEnum GetFileReaderTypeFor(string fileName)
+        {
+            string extension = Path.GetExtension(fileName);
+
+            if (extension == FileExtensionConst.Csv)
+                return FileReaderTypeEnum.Csv;
+
+            return FileReaderTypeEnum.Xml;
+        }
+    }
+}

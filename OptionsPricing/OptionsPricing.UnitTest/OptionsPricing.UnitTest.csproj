@@ -55,6 +55,7 @@
     <Compile Include="FileReader\FileReaderFactoryTest.cs" />
     <Compile Include="FileReader\FileReaderXmlTest.cs" />
     <Compile Include="Mock\FileReaderMock.cs" />
+    <Compile Include="OptionPricing\BlackScholes\BlackScholesCalculatorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

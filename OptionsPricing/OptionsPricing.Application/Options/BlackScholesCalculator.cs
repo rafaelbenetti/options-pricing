@@ -3,11 +3,26 @@ using OptionsPricing.Application.Options.Base;
 using OptionsPricing.Infrastructure.Consts;
 using OptionsPricing.Infrastructure.Extensions;
 using System;
+using System.Collections.Generic;
 
 namespace OptionsPricing.Application.Options
 {
     public class BlackScholesCalculator : IOptionPricingCalculator<BlackScholesInput>
     {
+        public List<BlackScholesResult> CalculateFor(List<BlackScholesInput> blackScholesInputData)
+        {
+            var blackScholesResultData = new List<BlackScholesResult>();
+
+            foreach (BlackScholesInput input in blackScholesInputData)
+            {
+                var blackScholesResult = new BlackScholesResult(input);
+                blackScholesResult.Result = CalculateFor(blackScholesResult);
+                blackScholesResultData.Add(blackScholesResult);
+            }
+
+            return blackScholesResultData;
+        }
+
         public double CalculateFor(BlackScholesInput blackScholesInput)
         {
             return CalculateFor(new BlackScholes(blackScholesInput));

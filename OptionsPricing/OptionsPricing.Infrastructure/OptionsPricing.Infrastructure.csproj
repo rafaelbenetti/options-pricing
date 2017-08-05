@@ -43,6 +43,7 @@
     <Compile Include="Consts\BlackScholesNameConst.cs" />
     <Compile Include="Consts\CallOption.cs" />
     <Compile Include="Consts\CcyConst.cs" />
+    <Compile Include="Consts\FileExtensionConst.cs" />
     <Compile Include="Extensions\DoubleExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ExceptionsResource.Designer.cs">
@@ -50,11 +51,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ExceptionsResource.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\ErrorsResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorsResource.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ExceptionsResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ExceptionsResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ErrorsResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorsResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
