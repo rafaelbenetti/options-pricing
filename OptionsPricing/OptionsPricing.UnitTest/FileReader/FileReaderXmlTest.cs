@@ -61,7 +61,7 @@ namespace OptionsPricing.UnitTest.FileReader
         private List<BlackScholesInput> GetInputsMock()
         {
             var reader = new FileReaderMock();
-            return reader.GetInvestmentsForCsv();
+            return reader.GetAll();
         }
     }
 }

@@ -6,7 +6,7 @@ namespace OptionsPricing.UnitTest.Mock
 {
     public class FileReaderMock
     {
-        internal List<BlackScholesInput> GetInvestmentsForCsv()
+        internal List<BlackScholesInput> GetAll()
         {
             return new List<BlackScholesInput>()
             {

@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptionsPricing.Application"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptionsPricing.Presentation.UI", "OptionsPricing.Presentation.UI\OptionsPricing.Presentation.UI.csproj", "{3EE18DE9-D945-40C5-9CF5-E91939A0920F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptionsPricing.IntegrationTest", "OptionsPricing.IntegrationTest\OptionsPricing.IntegrationTest.csproj", "{EE6064C6-F54F-47AA-9915-ACA3C9749F43}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{3EE18DE9-D945-40C5-9CF5-E91939A0920F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EE18DE9-D945-40C5-9CF5-E91939A0920F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EE18DE9-D945-40C5-9CF5-E91939A0920F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE6064C6-F54F-47AA-9915-ACA3C9749F43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE6064C6-F54F-47AA-9915-ACA3C9749F43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE6064C6-F54F-47AA-9915-ACA3C9749F43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE6064C6-F54F-47AA-9915-ACA3C9749F43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,5 +56,6 @@ Global
 		{124CD8F6-32F7-4CE5-A326-78182927161E} = {BF16B7F0-0692-4537-A47C-9841D844633C}
 		{344D0FB4-4BD3-4481-B61C-56E24F86F904} = {427194D2-7858-4B73-B437-BB72D7F75701}
 		{3EE18DE9-D945-40C5-9CF5-E91939A0920F} = {9D8173AF-64DB-41BE-8165-A0D17471D887}
+		{EE6064C6-F54F-47AA-9915-ACA3C9749F43} = {138441CB-A62F-4F03-B385-7F78D1FE988D}
 	EndGlobalSection
 EndGlobal

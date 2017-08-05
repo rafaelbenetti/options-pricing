@@ -36,9 +36,10 @@ namespace OptionsPricing.Presentation.UI
 
                     ShowResultsOnScreen(blackScholesResultData);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    MessageBox.Show(ErrorsResource.ErrorToProcessData, ErrorsResource.TitleErrorToProcessData, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    string message = $"{ErrorsResource.ErrorToProcessData} Error: {ex.Message}";
+                    MessageBox.Show(message, ErrorsResource.TitleErrorToProcessData, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
