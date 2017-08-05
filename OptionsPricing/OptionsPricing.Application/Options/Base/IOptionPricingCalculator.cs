@@ -5,3 +5,5 @@
         double CalculateFor(TInput input);
     }
 }
+
+

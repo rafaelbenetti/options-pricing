@@ -48,6 +48,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Const\BlackScholesNameConst.cs" />
+    <Compile Include="Const\CcyConst.cs" />
     <Compile Include="Const\PathConst.cs" />
     <Compile Include="FileReader\FileReaderCsvTest.cs" />
     <Compile Include="FileReader\FileReaderFactoryTest.cs" />

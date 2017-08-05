@@ -23,11 +23,12 @@ namespace OptionsPricing.Application
             List<BlackScholesInput> blackScholesInputXml = readerXml.Read<BlackScholesInput>($"{path}.xml");
 
             var blackScholesCalculator = new BlackScholesCalculator();
-
             foreach (BlackScholesInput blackScholesInput in blackScholesInputCsv)
             {
                 double result = blackScholesCalculator.CalculateFor(blackScholesInput);
-            }            
+                Console.WriteLine($"Calculation for Id: {blackScholesInput.Id},  Strike Price: {blackScholesInput.Strike}, Result: {result}");
+            }
+            Console.ReadKey();
         }
     }
 }
