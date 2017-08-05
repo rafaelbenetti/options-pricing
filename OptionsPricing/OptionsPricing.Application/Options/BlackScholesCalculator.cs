@@ -33,9 +33,9 @@ namespace OptionsPricing.Application.Options
             double deltaOne = CalcDeltaOne(blackScholes);
             double deltaTwo = CalcDeltaTwo(blackScholes, deltaOne);
 
-            if (blackScholes.CallOption == CallOption.CALL)
+            if (blackScholes.CallOption == CallOption.Call)
                 return CalculateForCallOption(blackScholes, deltaOne, deltaTwo);
-            else if (blackScholes.CallOption == CallOption.PUT)
+            else if (blackScholes.CallOption == CallOption.Put)
                 return CalculateForPutOption(blackScholes, deltaOne, deltaTwo);                
 
             throw new InvalidCallOptionException();

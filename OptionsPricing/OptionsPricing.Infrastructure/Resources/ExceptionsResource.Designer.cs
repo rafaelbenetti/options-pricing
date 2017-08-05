@@ -77,5 +77,14 @@ namespace OptionsPricing.Infrastructure.Resources {
                 return ResourceManager.GetString("MsgInvalidFileReaderType", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Input Data must be valid..
+        /// </summary>
+        public static string MsgInvalidInputException {
+            get {
+                return ResourceManager.GetString("MsgInvalidInputException", resourceCulture);
+            }
+        }
     }
 }

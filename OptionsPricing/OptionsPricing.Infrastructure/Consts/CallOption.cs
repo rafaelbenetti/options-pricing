@@ -2,7 +2,7 @@
 {
     public static class CallOption
     {
-        public const char CALL = 'C';
-        public const char PUT = 'P';
+        public const char Call = 'C';
+        public const char Put = 'P';
     }
 }

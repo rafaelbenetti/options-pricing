@@ -2,7 +2,7 @@
 {
     public static class CcyConst
     {
-        public const string PLN = "PLN";
-        public const string USD = "USD";
+        public const string Pln = "PLN";
+        public const string Usd = "USD";
     }
 }

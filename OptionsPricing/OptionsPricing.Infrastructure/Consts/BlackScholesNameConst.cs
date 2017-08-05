@@ -2,7 +2,7 @@
 {
     public class BlackScholesNameConst
     {
-        public const string ABC_INC = "ABC INC";
-        public const string CDE_LTD = "CDE LTD";        
+        public const string AbcInc = "ABC INC";
+        public const string CdeLtd = "CDE LTD";        
     }
 }

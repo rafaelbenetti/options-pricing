@@ -1,4 +1,5 @@
-﻿using OptionsPricing.Infrastructure.Consts;
+﻿using OptionsPricing.Application.Options.Base;
+using OptionsPricing.Infrastructure.Consts;
 using System;
 using System.Collections.Generic;
 
@@ -9,34 +10,41 @@ namespace OptionsPricing.Application.Models.BlackScholes
         private Dictionary<string, double> _risksForRegions =
             new Dictionary<string, double>()
         {
-            { CcyConst.PLN, 5 },
-            { CcyConst.USD, 3 }
+            { CcyConst.Pln, 5 },
+            { CcyConst.Usd, 3 }
         };
 
         private Dictionary<string, double> _volatilityForNames =
             new Dictionary<string, double>()
         {
-            { BlackScholesNameConst.ABC_INC, 40 },
-            { BlackScholesNameConst.CDE_LTD, 5 }
+            { BlackScholesNameConst.AbcInc, 40 },
+            { BlackScholesNameConst.CdeLtd, 5 }
         };
 
         private Dictionary<string, double> _stockPricesForNames =
             new Dictionary<string, double>()
         {
-            { BlackScholesNameConst.ABC_INC, 30 },
-            { BlackScholesNameConst.CDE_LTD, 110 }
+            { BlackScholesNameConst.AbcInc, 30 },
+            { BlackScholesNameConst.CdeLtd, 110 }
         };
 
         private DateTime _startDate = new DateTime(2016, 04, 01);
 
         public BlackScholes(BlackScholesInput input)
         {
-            this.CallOption = input.Cp;
-            this.StrikePrice = input.Strike;
-            this.PeriodInDays = (input.Expiry - _startDate).Days;
-            this.RiskFreeRate = _risksForRegions[input.Ccy];
-            this.Volatility = _volatilityForNames[input.Name];
-            this.StockPrice = _stockPricesForNames[input.Name];
+            try
+            {
+                this.CallOption = input.Cp;
+                this.StrikePrice = input.Strike;
+                this.PeriodInDays = (input.Expiry - _startDate).Days;
+                this.RiskFreeRate = _risksForRegions[input.Ccy];
+                this.Volatility = _volatilityForNames[input.Name];
+                this.StockPrice = _stockPricesForNames[input.Name];
+            }
+            catch (Exception)
+            {
+                throw new InvalidInputDataException();
+            }            
         }
 
         public char CallOption { get; private set; }

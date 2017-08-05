@@ -123,4 +123,7 @@
   <data name="MsgInvalidFileReaderType" xml:space="preserve">
     <value>The File Reader Type specified is not implemented.</value>
   </data>
+  <data name="MsgInvalidInputException" xml:space="preserve">
+    <value>The Input Data must be valid.</value>
+  </data>
 </root>

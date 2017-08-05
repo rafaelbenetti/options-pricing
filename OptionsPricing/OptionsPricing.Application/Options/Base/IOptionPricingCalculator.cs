@@ -1,4 +1,6 @@
-﻿namespace OptionsPricing.Application.Options.Base
+﻿using System.Collections.Generic;
+
+namespace OptionsPricing.Application.Options.Base
 {
     public interface IOptionPricingCalculator<TInput>
     {

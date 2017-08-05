@@ -6,7 +6,7 @@ namespace OptionsPricing.UnitTest.Mock
 {
     public class FileReaderMock
     {
-        public List<BlackScholesInput> GetInvestmentsForCsv()
+        internal List<BlackScholesInput> GetInvestmentsForCsv()
         {
             return new List<BlackScholesInput>()
             {
@@ -19,6 +19,11 @@ namespace OptionsPricing.UnitTest.Mock
                 CreateNewFor(129,"CDE LTD","StockOption","European",'C',new DateTime(2016,10,01),100,"USD"),
                 CreateNewFor(130,"ABC INC","StockOption","European",'P',new DateTime(2016,10,01),50,"PLN"),
             };
+        }
+
+        internal BlackScholesInput GetOne()
+        {
+            return CreateNewFor(123, "CDE LTD", "StockOption", "European", 'C', new DateTime(2017, 04, 01), 100, "USD");
         }
 
         private BlackScholesInput CreateNewFor(int id, string name, string type, string style, char cp, DateTime expiry, double strike, string ccy)
