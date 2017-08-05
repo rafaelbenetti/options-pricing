@@ -7,6 +7,7 @@ using OptionsPricing.Infrastructure.Resources;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace OptionsPricing.Presentation.UI
@@ -32,12 +33,20 @@ namespace OptionsPricing.Presentation.UI
 
                     var optionPricingCalculator = new BlackScholesCalculator();
                     List<BlackScholesResult> blackScholesResultData = optionPricingCalculator.CalculateFor(blackScholesInputData);
+
+                    ShowResultsOnScreen(blackScholesResultData);
                 }
                 catch (Exception)
                 {
                     MessageBox.Show(ErrorsResource.ErrorToProcessData, ErrorsResource.TitleErrorToProcessData, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void ShowResultsOnScreen(List<BlackScholesResult> blackScholesResultData)
+        {
+            dataGridViewResuls.DataSource = blackScholesResultData;
+            lblResultPortfolio.Text = blackScholesResultData.Sum((d) => d.Result).ToString("C");
         }
 
         private FileReaderTypeEnum GetFileReaderTypeFor(string fileName)

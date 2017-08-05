@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExecutionProcess.cs" />
     <Compile Include="FileReader\Base\FileReaderTypeEnum.cs" />
     <Compile Include="FileReader\Base\IFileReader.cs" />
     <Compile Include="FileReader\Base\NotImplementedFileReaderException.cs" />
