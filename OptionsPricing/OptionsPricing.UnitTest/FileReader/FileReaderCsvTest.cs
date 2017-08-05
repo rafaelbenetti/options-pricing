@@ -30,10 +30,7 @@ namespace OptionsPricing.UnitTest.FileReader
             List<BlackScholesInput> expectedInvestments = GetInputsMock();
 
             Assert.AreEqual(investments.Count, expectedInvestments.Count);
-
-            // TODO: Overrides Equals to compare objects... 
-            // CollectionAssert.AreEqual(investments, expectedInvestments);
-
+            
             for (int i = 0; i < investments.Count; i++)
             {
                 var investment = investments[i];
